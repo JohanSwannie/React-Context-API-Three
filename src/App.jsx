@@ -1,66 +1,65 @@
 import { useState, useEffect } from "react";
-import { ToDoProvider } from "./contexts";
-import ToDoAddForm from "./components/ToDoAddForm";
-import ToDoItem from "./components/ToDoItem";
+import { TodoProvider } from "./contexts";
+import { TodoAddForm, TodoItem } from "./components";
 
 function App() {
-  const [listOfToDos, setListOfToDos] = useState([]);
+  const [todos, setTodos] = useState([]);
 
-  useEffect(() => {
-    const todos = JSON.parse(localStorage.getItem("todos"));
-    if (todos && todos.length > 0) {
-      setListOfToDos(todos);
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(listOfToDos));
-  }, [listOfToDos]);
-
-  const toDoAdd = (todo) => {
-    setListOfToDos((prev) => [{ id: Date.now(), ...todo }, ...prev]);
+  const addTodo = (todo) => {
+    setTodos((prev) => [{ id: Date.now(), ...todo }, ...prev]);
   };
 
-  const toDoUpdate = (id, todo) => {
-    setListOfToDos((prev) =>
+  const updateTodo = (id, todo) => {
+    setTodos((prev) =>
       prev.map((prevTodo) => (prevTodo.id === id ? todo : prevTodo))
     );
   };
 
-  const toDoDelete = (id) => {
-    setListOfToDos((prev) => prev.filter((todo) => todo.id !== id));
+  const deleteTodo = (id) => {
+    setTodos((prev) => prev.filter((todo) => todo.id !== id));
   };
 
   const toggleComplete = (id) => {
-    setListOfToDos((prev) =>
+    setTodos((prev) =>
       prev.map((prevTodo) =>
         prevTodo.id === id
-          ? { ...prevTodo, toDoCompleted: !prevTodo.toDoCompleted }
+          ? { ...prevTodo, completed: !prevTodo.completed }
           : prevTodo
       )
     );
   };
 
+  useEffect(() => {
+    const todos = JSON.parse(localStorage.getItem("todos"));
+    if (todos && todos.length > 0) {
+      setTodos(todos);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
+
   return (
-    <ToDoProvider
-      value={{ listOfToDos, toDoAdd, toDoUpdate, toDoDelete, toggleComplete }}
+    <TodoProvider
+      value={{ todos, addTodo, updateTodo, deleteTodo, toggleComplete }}
     >
-      <div className="bg-[#1a2627] min-h-screen select-none">
-        <div className="w-full max-w-5xl text-white mx-auto shadow-lg shadow-white rounded-2xl px-12 py-16">
-          <h1 className="text-center mb-6 text-2xl font-bold">My ToDo List</h1>
-          <div className="mb-5">
-            <ToDoAddForm />
+      <div className="bg-[#118992] min-h-screen select-none">
+        <div className="w-full max-w-7xl mx-auto shadow-lg shadow-white rounded-md px-12 py-16 text-white">
+          <h1 className="text-2xl font-bold text-center mb-8">Todos List</h1>
+          <div className="mb-4">
+            <TodoAddForm />
           </div>
           <div className="flex flex-wrap gap-y-3">
-            {listOfToDos.map((todo) => (
+            {todos.map((todo) => (
               <div key={todo.id} className="w-full">
-                <ToDoItem todo={todo} />
+                <TodoItem todo={todo} />
               </div>
             ))}
           </div>
         </div>
       </div>
-    </ToDoProvider>
+    </TodoProvider>
   );
 }
 
