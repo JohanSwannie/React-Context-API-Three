@@ -1,14 +1,15 @@
 import { useState } from "react";
-import { useToDos } from "../contexts/ToDoContext";
+import { useTodo } from "../contexts/TodoContext";
 
-function ToDoItem({ todo }) {
-  const [toDoMessage, setToDoMessage] = useState(todo.toDo);
-  const [canEditToDo, setCanEditToDo] = useState(false);
+function TodoItem({ todo }) {
+  const [isTodoEditable, setIsTodoEditable] = useState(false);
+  const [todoMsg, setTodoMsg] = useState(todo.todo);
 
-  const { toDoUpdate, toDoDelete, toggleComplete } = useToDos();
+  const { updateTodo, deleteTodo, toggleComplete } = useTodo();
 
-  const editToDo = () => {
-    toDoUpdate(todo.id, { ...todo, toDo: toDoMessage });
+  const editTodo = () => {
+    updateTodo(todo.id, { ...todo, todo: todoMsg });
+    setIsTodoEditable(false);
   };
 
   const toggleCompleted = () => {
@@ -18,40 +19,39 @@ function ToDoItem({ todo }) {
   return (
     <div
       className={`flex border border-black/10 rounded-lg px-2 py-1 gap-x-3 shadow-sm shadow-white/50 duration-300  text-black ${
-        todo.toDoCompleted ? "bg-[#70af55]" : "bg-[#84caa4]"
+        todo.completed ? "bg-[#70af55]" : "bg-[#84caa4]"
       }`}
     >
       <input
         type="checkbox"
         className="cursor-pointer"
-        checked={todo.toDoCompleted}
+        checked={todo.completed}
         onChange={toggleCompleted}
       />
       <input
         type="text"
         className={`border outline-none w-full bg-transparent rounded-lg ${
-          canEditToDo ? "border-white px-2 py-1" : "border-transparent"
+          isTodoEditable ? "border-white px-2 py-1" : "border-transparent"
         }`}
-        value={toDoMessage}
-        onChange={(e) => setToDoMessage(e.target.value)}
-        readOnly={!canEditToDo}
+        value={todoMsg}
+        onChange={(e) => setTodoMsg(e.target.value)}
+        readOnly={!isTodoEditable}
       />
       <button
         className="inline-flex w-8 h-8 rounded-lg text-sm border-black border-2 justify-center items-center bg-gray-50 hover:bg-gray-100 shrink-0 disabled:opacity-50"
         onClick={() => {
-          if (todo.toDoCompleted) return;
-          if (canEditToDo) {
-            editToDo();
-          } else setCanEditToDo((prev) => !prev);
+          if (todo.completed) return;
+          if (isTodoEditable) {
+            editTodo();
+          } else setIsTodoEditable((prev) => !prev);
         }}
-        disabled={todo.toDoCompleted}
+        disabled={todo.completed}
       >
-        {canEditToDo ? "📁" : "✏️"}
+        {isTodoEditable ? "📁" : "✏️"}
       </button>
-
       <button
         className="inline-flex w-8 h-8 rounded-lg text-sm justify-center items-center bg-gray-50 hover:bg-gray-100 shrink-0 border-black border-2"
-        onClick={() => toDoDelete(todo.id)}
+        onClick={() => deleteTodo(todo.id)}
       >
         ❌
       </button>
@@ -59,4 +59,4 @@ function ToDoItem({ todo }) {
   );
 }
 
-export default ToDoItem;
+export default TodoItem;
