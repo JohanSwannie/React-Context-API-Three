@@ -4,7 +4,7 @@ export const ToDoContext = createContext({
   listOfToDos: [
     {
       id: 1,
-      toDo: "Initial Message",
+      toDo: "Initial To Do Message",
       toDoCompleted: false,
     },
   ],
