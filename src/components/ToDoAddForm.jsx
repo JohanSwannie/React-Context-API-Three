@@ -23,7 +23,7 @@ function TodoAddForm() {
       <input
         type="text"
         placeholder="Create a Todo......."
-        className="w-full border placeholder:text-slate-700 border-black/10 px-3 outline-none duration-150 bg-white/20 py-1.5"
+        className="w-full border placeholder:text-white-700 border-black/10 px-3 outline-none duration-150 bg-white/20 py-1.5"
         value={todo}
         name="todo"
         ref={addToDoMessage}
