@@ -25,7 +25,8 @@ function ToDoAddForm() {
         type="text"
         placeholder="Add another ToDo"
         className="w-full border placeholder:text-white-700 border-black/10 px-3 outline-none duration-150 bg-white/20 py-1.5"
-        value={newToDoItem}
+        name="todo"
+        defaultValue={newToDoItem}
         ref={addAnotherToDo}
         maxLength={75}
         onChange={(event) => setNewToDoItem(event.target.value)}
