@@ -21,11 +21,25 @@ function App() {
     setListOfToDos((prev) => [{ id: Date.now(), ...todo }, ...prev]);
   };
 
-  const toDoUpdate = (id, todo) => {};
+  const toDoUpdate = (id, todo) => {
+    setListOfToDos((prev) =>
+      prev.map((prevTodo) => (prevTodo.id === id ? todo : prevTodo))
+    );
+  };
 
-  const toDoDelete = () => {};
+  const toDoDelete = (id) => {
+    setListOfToDos((prev) => prev.filter((todo) => todo.id !== id));
+  };
 
-  const toggleComplete = () => {};
+  const toggleComplete = (id) => {
+    setListOfToDos((prev) =>
+      prev.map((prevTodo) =>
+        prevTodo.id === id
+          ? { ...prevTodo, toDoCompleted: !prevTodo.toDoCompleted }
+          : prevTodo
+      )
+    );
+  };
 
   return (
     <ToDoProvider
