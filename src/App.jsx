@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { TodoProvider } from "./contexts";
-import { TodoAddForm, TodoItem } from "./components";
+import TodoAddForm from "./components/TodoAddForm";
+import TodoItem from "./components/TodoItem";
 
 function App() {
   const [todos, setTodos] = useState([]);
