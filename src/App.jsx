@@ -6,17 +6,17 @@ import TodoItem from "./components/TodoItem";
 function App() {
   const [todos, setTodos] = useState([]);
 
-  const addTodo = (todo) => {
+  const addToDo = (todo) => {
     setTodos((prev) => [...prev, { id: Date.now(), ...todo }]);
   };
 
-  const updateTodo = (id, todo) => {
+  const updateToDo = (id, todo) => {
     setTodos((prev) =>
       prev.map((prevTodo) => (prevTodo.id === id ? todo : prevTodo))
     );
   };
 
-  const deleteTodo = (id) => {
+  const deleteToDo = (id) => {
     setTodos((prev) => prev.filter((todo) => todo.id !== id));
   };
 
@@ -43,7 +43,7 @@ function App() {
 
   return (
     <TodoProvider
-      value={{ todos, addTodo, updateTodo, deleteTodo, toggleComplete }}
+      value={{ todos, addToDo, updateToDo, deleteToDo, toggleComplete }}
     >
       <div className="bg-[#212a2b] min-h-screen select-none">
         <div className="w-full max-w-7xl mx-auto shadow-lg shadow-white rounded-md px-12 py-16 text-white">
