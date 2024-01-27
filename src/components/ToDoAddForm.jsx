@@ -6,7 +6,7 @@ function TodoAddForm() {
 
   const addToDoMessage = useRef();
 
-  const { addTodo } = useTodo();
+  const { addToDo } = useTodo();
 
   useEffect(() => {
     addToDoMessage.current.focus();
@@ -15,7 +15,7 @@ function TodoAddForm() {
   const add = (e) => {
     e.preventDefault();
     if (!todo) return;
-    addTodo({ todo, completed: false });
+    addToDo({ todo, completed: false });
     setTodo("");
   };
   return (
