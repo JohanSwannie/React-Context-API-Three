@@ -5,10 +5,10 @@ function TodoItem({ todo }) {
   const [isTodoEditable, setIsTodoEditable] = useState(false);
   const [todoMsg, setTodoMsg] = useState(todo.todo);
 
-  const { updateTodo, deleteTodo, toggleComplete } = useTodo();
+  const { updateToDo, deleteToDo, toggleComplete } = useTodo();
 
   const editTodo = () => {
-    updateTodo(todo.id, { ...todo, todo: todoMsg });
+    updateToDo(todo.id, { ...todo, todo: todoMsg });
     setIsTodoEditable(false);
   };
 
@@ -51,7 +51,7 @@ function TodoItem({ todo }) {
       </button>
       <button
         className="inline-flex w-8 h-8 rounded-lg text-sm justify-center items-center bg-gray-50 hover:bg-gray-100 shrink-0 border-black border-2"
-        onClick={() => deleteTodo(todo.id)}
+        onClick={() => deleteToDo(todo.id)}
       >
         ❌
       </button>
