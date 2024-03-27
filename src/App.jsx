@@ -31,9 +31,9 @@ function App() {
   };
 
   useEffect(() => {
-    const todos = JSON.parse(localStorage.getItem("todos"));
-    if (todos && todos.length > 0) {
-      setTodos(todos);
+    const todosStored = JSON.parse(localStorage.getItem("todos"));
+    if (todosStored && todosStored.length > 0) {
+      setTodos(todosStored);
     }
   }, []);
 
