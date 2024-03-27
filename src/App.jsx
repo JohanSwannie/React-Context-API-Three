@@ -46,8 +46,8 @@ function App() {
       value={{ todos, addToDo, updateToDo, deleteToDo, toggleComplete }}
     >
       <div className="bg-[#212a2b] min-h-screen select-none">
-        <div className="w-full max-w-7xl mx-auto shadow-lg shadow-white rounded-md px-12 py-16 text-white">
-          <h1 className="text-2xl font-bold text-center mb-8">Todos List</h1>
+        <div className="w-full max-w-7xl mx-auto shadow-lg shadow-white rounded-md px-10 py-10 text-white">
+          <h1 className="text-2xl font-bold text-center mb-2">Todos List</h1>
           <div className="mb-4">
             <TodoAddForm />
           </div>
